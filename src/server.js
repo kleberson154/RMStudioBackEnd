@@ -20,6 +20,8 @@ import { swaggerOptions } from './config/swagger.js'
 const specs = swaggerJsdoc(swaggerOptions)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
 
+const port = process.env.PORT || 3000
+
 app.use(
   cors({
     origin: ['https://rmstudio.vercel.app', 'https://rmstudioadmin.vercel.app']
@@ -37,6 +39,6 @@ app.use('/agendamentos', appointmentRoutes)
 app.use('/datas', dateRoutes)
 app.use('/servicos', serviceRoutes)
 
-app.listen(3000, () => {
-  console.log('API rodando na porta 3000')
+app.listen(port, () => {
+  console.log(`API rodando na porta ${port}`)
 })
