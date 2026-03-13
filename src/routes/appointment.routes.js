@@ -5,6 +5,7 @@ import {
   listByDate,
   finalize,
   cancel,
+  remove,
   hasPendingByCpf,
   getByDataAndHorario
 } from '../controllers/appointment.controller.js'
@@ -167,5 +168,28 @@ router.patch('/:id/finalizar', auth, finalize)
  *         description: Agendamento não encontrado
  */
 router.patch('/:id/cancelar', auth, cancel)
+
+/**
+ * @openapi
+ * /agendamentos/{id}:
+ *   delete:
+ *     tags:
+ *       - Agendamentos
+ *     summary: Deletar agendamento
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Agendamento deletado
+ *       404:
+ *         description: Agendamento não encontrado
+ */
+router.delete('/:id', auth, remove)
 
 export default router

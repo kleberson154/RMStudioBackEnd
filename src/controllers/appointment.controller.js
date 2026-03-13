@@ -181,6 +181,22 @@ export async function cancel(req, res) {
   return updateStatus(req, res, 'cancelado')
 }
 
+export async function remove(req, res) {
+  try {
+    const { id } = req.params
+
+    const agendamento = await Appointment.findByIdAndDelete(id)
+
+    if (!agendamento) {
+      return res.status(404).json({ error: 'Agendamento não encontrado' })
+    }
+
+    res.status(200).json({ message: 'Agendamento deletado com sucesso' })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 export async function getByDataAndHorario(req, res) {
   try {
     const { data, horario } = req.params
